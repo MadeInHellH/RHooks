@@ -1,25 +1,55 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import ReactDOM from 'react-dom';
 
-function App() {
+const App = (props) => {
+  const [count, setCount] = useState(0);
+  const [deviceType, setDeviceType] = useState('desktop');
+  const [ datos, setDatos] = useState({
+    nombre: '', 
+    edad: 0,
+  });
+
+  console.log(datos);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div
+       onClick={() => setCount(count + 1)}
+       >
+         numero de clicks {count}
+
+         <button
+         onClick={() => {
+           setDatos({
+             ...datos,
+             nombre: 'leo',
+              });
+               }}
+               >
+           canbiar datos
+         </button>
+         
+         <br />
+         desktop
+         <input
+               onClick={() => setDeviceType('desktop')}
+               checked={deviceType === 'desktop'}
+               type="checkbox"
+               />
+
+         <br />
+         mobible
+         <input
+               onClick={() => setDeviceType('mobible')}
+               checked={deviceType === 'mobible'}
+               type="checkbox"
+               />       
+
     </div>
-  );
+  )
 }
 
-export default App;
+ReactDOM.render(<App />, document.getElementById('root'));
+
+console.log('Hola mundo react!');
+
+export default App
