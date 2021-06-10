@@ -1,21 +1,32 @@
 import { useState, useEffect } from 'react';
 
 
-//const useApi = async (url) => {
+const useApi =  (url, _options) => {
      const [isLoading, setIsLoading] = useState(true);
      const [data, setData] = useState(null);
      const [error, setError] = useState('');
 
-     useEffect (() => {
-        console.log(123, url);
-     }, [url]);
+     const doFetch = async (options = _options) => {
+        try {
+            const response = await fetch(url, options);
 
-     //const response = await fetch(url)
+            if (!response.ok) {
+                throw new Error( response.statusText );
+            }
+
+            const data = await response.json();
+            setData(data);
+        } catch (error) {
+            setError(error.message);
+        }
+
+     }
 
     return {
         response: data, 
         error, 
         isLoading,
+        refetch: doFetch, 
     };
 };
 export default useApi;
