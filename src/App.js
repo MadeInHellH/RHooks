@@ -1,55 +1,18 @@
-import React, { useState } from 'react';
-import ReactDOM from 'react-dom';
+import React, { useState, useEffect } from 'react';
+import useApi from './useApi';
 
-const App = (props) => {
-  const [count, setCount] = useState(0);
-  const [deviceType, setDeviceType] = useState('desktop');
-  const [ datos, setDatos] = useState({
-    nombre: '', 
-    edad: 0,
-  });
+function App() {
+ const { response, error, isLoading} = useApi('http://localhost:4444/orders' + Math.random());
+ const[value , setValue] = useState(1);
+ console.log({ response, error, isLoading });
 
-  console.log(datos);
 
+// setInterval(() => setValue(value + 1), 1000);
   return (
-    <div
-       onClick={() => setCount(count + 1)}
-       >
-         numero de clicks {count}
-
-         <button
-         onClick={() => {
-           setDatos({
-             ...datos,
-             nombre: 'leo',
-              });
-               }}
-               >
-           canbiar datos
-         </button>
-         
-         <br />
-         desktop
-         <input
-               onClick={() => setDeviceType('desktop')}
-               checked={deviceType === 'desktop'}
-               type="checkbox"
-               />
-
-         <br />
-         mobible
-         <input
-               onClick={() => setDeviceType('mobible')}
-               checked={deviceType === 'mobible'}
-               type="checkbox"
-               />       
-
+    <div>
+      <h1>Hola</h1>
     </div>
-  )
+  );
 }
 
-ReactDOM.render(<App />, document.getElementById('root'));
-
-console.log('Hola mundo react!');
-
-export default App
+export default App;
