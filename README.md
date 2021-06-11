@@ -14,3 +14,4 @@ El ultimo ejemplo no me salio
 
 # Custom Hooks 3 Hooks con eventos
 Primer y segundo ejercicio echo hasta el minuto 13.
+El tercer ejemplo nos permite obtener el tamaño de la ventana
