@@ -1,35 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import useApi from './useApi';
+import useTabStatus from './hooks/useTabStatus';
 
 function App() {
- const { response, error, isLoading, refetch } = useApi('http://localhost:4444/orders');
- console.log({ response, error, isLoading });
-
-if (isLoading) {
-  return <h1>Loading...</h1>;
-}
-
-const onRefresh = () => {
-  refetch();
-};
+ const { hasFocus} = useTabStatus();
 
   return (
     <div>
-       {error && (
-         <>
-            <h1>Error</h1>
-            <p>{error}</p>
-          </>  
-       )}
-       <h1>Data</h1>
-
-        <uL>
-          {response.map((order) =>(
-          <li key={order.id}>{order.name}</li>
-          ))}
-        </uL>
-
-           <button onClick={onRefresh}>Refresh</button>   
+       <h1>Focus</h1>
+       <span>{`Has Focus ${hasFocus ? 'yes' : 'no'}`}</span>
     </div>
   );
 }
